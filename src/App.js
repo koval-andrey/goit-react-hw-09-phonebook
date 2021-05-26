@@ -5,7 +5,8 @@ import ContactList from "./Components/ContactList";
 import Form from "./Components/Form";
 import { Component } from "react";
 import { connect } from "react-redux";
-import contactsActions from "./redux/phonebook-action";
+//import contactsActions from "./redux/phonebook-action";
+import { getIsLoading } from './redux/phonebook-selector';
 
 class App extends Component {
   state = {
