@@ -1,6 +1,6 @@
 //import { combineReducer } from "redux";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import logger from "redux-logger";
+//import logger from "redux-logger";
 import {
   //persistStore,
   //persistReducer,
@@ -32,11 +32,12 @@ const middleware = [
 //const reducer = (state = {}, { type, payload }) => state;
 
 //const store = createStore(reducer);
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     contacts: phonebookReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === "development",
 });
-export const store;
+
+export default store;

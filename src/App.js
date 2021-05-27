@@ -3,9 +3,10 @@ import { ToastContainer, toast } from "react-toastify";
 import Filter from "./Components/Filter";
 import ContactList from "./Components/ContactList";
 import Form from "./Components/Form";
-import { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 //import contactsActions from "./redux/phonebook-action";
+import * as contactsOperations from './redux/phonebook-operations';
 import { getIsLoading } from './redux/phonebook-selector';
 
 class App extends Component {
@@ -20,19 +21,20 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const contacts = localStorage.getItem("contacts");
-    const contactsParse = JSON.parse(contacts);
-    if (contactsParse) {
-      this.setState({ contacts: contactsParse });
-    }
+    //const contacts = localStorage.getItem("contacts");
+    //const contactsParse = JSON.parse(contacts);
+    //if (contactsParse) {
+    //  this.setState({ contacts: contactsParse });
+    this.props.fetchContacts()
   }
+  
 
-  componentDidUpdate(prevState) {
-    const { contacts } = this.state;
-    if (contacts !== prevState.contacts) {
-      localStorage.setItem("contacts", JSON.stringify(contacts));
-    }
-  }
+  //componentDidUpdate(prevState) {
+  //  const { contacts } = this.state;
+  //  if (contacts !== prevState.contacts) {
+  //    localStorage.setItem("contacts", JSON.stringify(contacts));
+  //  }
+  //}
 
   addContact = (name, number) => {
     const { contacts } = this.state;
@@ -103,19 +105,20 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  value: state.contacts.filter,
+const mapStateToProps = state => ({
+  isLoadingContacts: getIsLoading(state),
+  //value: state.contacts.filter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: ({ name, number }) =>
-    dispatch(contactsActions.addContact({ name, number })),
+  fetchContacts: () => (dispatch) => (contactsOperations.fetchContacts()),
+  //  dispatch(contactsActions.addContact({ name, number })),
 
-  onChange: (event) =>
-    dispatch(contactsActions.changeFilter(event.target.value)),
+  //onChange: (event) =>
+  // dispatch(contactsActions.changeFilter(event.target.value)),
 
-  onDeleteContact: (contactId) =>
-    dispatch(contactsActions.deleteContact(contactId)),
+  //onDeleteContact: (contactId) =>
+  //  dispatch(contactsActions.deleteContact(contactId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
