@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 //import contactsActions from "./redux/phonebook-action";
 import * as contactsOperations from './redux/phonebook-operations';
 import { getIsLoading } from './redux/phonebook-selector';
-
+import { deleteContact } from './redux/phonebook-selector';
 class App extends Component {
   state = {
     contacts: [
@@ -76,19 +76,20 @@ class App extends Component {
     }));
   };
   render() {
-    const { filter } = this.state;
+    //const { filter } = this.state;
     const visibleContacts = this.getContacts();
 
     return (
       <>
         <h1>Phonebook</h1>
-        <Form onSubmit={this.addContact} />
+        <Form/>
         <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.changeFilter} />
+        <Filter />
         <ContactList
           contacts={visibleContacts}
           onDeleteContact={this.deleteContact}
         />
+        {this.props.isLoadingContacts && <h2> Loading contacts...</h2>}
         <ToastContainer
           position="top-center"
           autoClose={3000}
@@ -110,15 +111,15 @@ const mapStateToProps = state => ({
   //value: state.contacts.filter,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchContacts: () => (dispatch) => (contactsOperations.fetchContacts()),
+const mapDispatchToProps = dispatch => ({
+  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
+  onDelete: contactId => dispatch(contactsOperations.deleteContact(contactId)),
   //  dispatch(contactsActions.addContact({ name, number })),
 
   //onChange: (event) =>
   // dispatch(contactsActions.changeFilter(event.target.value)),
 
-  //onDeleteContact: (contactId) =>
-  //  dispatch(contactsActions.deleteContact(contactId)),
+//onDeleteContact: (contactId) => dispatch(contactsActions.deleteContact(contactId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

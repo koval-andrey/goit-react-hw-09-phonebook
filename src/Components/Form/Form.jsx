@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import shortid from 'shortid';
 import styles from './Form.module.css';
 import PropTypes from 'prop-types';
+import { getContacts } from '../../redux/phonebook-selectors';
+import * as contactsOperations from '../../redux/phonebook-operations';
 
 class Form extends Component {
   state = { name: '', number: '' };
@@ -28,6 +31,7 @@ class Form extends Component {
   }
 
   render() {
+    const { name, number } = this.state;
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <label className={styles.label} htmlFor={this.nameInputId}>
@@ -65,4 +69,6 @@ Form.propTypes = {
   number: PropTypes.number,
 };
 
-export default Form;
+const mapStateToProps = state =>({contacts: getContacts(state),});
+const mapDispatchToProps = dispatch => ({ onSubmit: ({ name, number }) => dispatch(contactsOperations.addContact({ name,number }))})
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

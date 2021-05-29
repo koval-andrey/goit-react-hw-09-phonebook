@@ -1,18 +1,31 @@
 import styles from './Filter.module.css'
+import * as actions from '../../redux/phonebook-action';
+import { getFilter } from '../../redux/phonebook-selector';
 
 
-const Filter = ({ value, onChange }) => (
-  <label className={styles.label}>
-    Find contacts by Name
-    <input
-      type="text"
-      className={styles.input}
-      value={value}
-      onChange={onChange}
-    />
-  </label>
+const Filter = ({ filter, onChange }) => (
+  <div className={styles.wrapper}>
+    <label className={styles.label}>
+      Find by Name
+    <input className={styles.input} type="text" value={filter} onChange={onChange} />
+    </label>
+  </div>
 );
+Filter.defaultProps = {
+  filter: ''
+}
 
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
+}
 
+const mapStateToProps = (state) => ({
+  filter: getFilter(state)
+})
 
-export default Filter;
+const mapDispatchToProps = dispatch => ({
+  onChange: event => dispatch(actions.changeFilter(event.target.value))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

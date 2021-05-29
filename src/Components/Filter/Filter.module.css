@@ -1,3 +1,8 @@
+.wrapper {
+  border-bottom: 1px solid #000;
+  width: 450px;
+  margin-bottom: 10px;
+}
 .label {
     display: block;
     width: 500px;
