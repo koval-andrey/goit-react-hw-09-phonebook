@@ -1,4 +1,6 @@
-import styles from './Filter.module.css'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import styles from './Filter.module.css';
 import * as actions from '../../redux/phonebook-action';
 import { getFilter } from '../../redux/phonebook-selector';
 

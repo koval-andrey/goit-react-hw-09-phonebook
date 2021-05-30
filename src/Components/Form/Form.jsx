@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import shortid from 'shortid';
 import styles from './Form.module.css';
 import PropTypes from 'prop-types';
-import { getContacts } from '../../redux/phonebook-selectors';
+import { getContacts } from '../../redux/phonebook-selector';
 import * as contactsOperations from '../../redux/phonebook-operations';
 
 class Form extends Component {
