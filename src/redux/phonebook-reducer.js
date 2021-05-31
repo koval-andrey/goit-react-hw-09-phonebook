@@ -19,7 +19,7 @@ const contacts = createReducer([], {
   [addContactSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactsSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
-})
+});
 const loading = createReducer(false, {
   [fetchContactsRequest]: () => true,
   [fetchContactsSuccess]: () => false,
