@@ -1,4 +1,7 @@
 import shortid from "shortid";
+import { connect } from 'react-redux';
+
+
 import { ToastContainer, toast } from "react-toastify";
 import Filter from "./Components/Filter";
 import ContactList from "./Components/ContactList";
@@ -10,22 +13,14 @@ import * as contactsOperations from './redux/phonebook-operations';
 import { getIsLoading } from './redux/phonebook-selector';
 import { deleteContact } from './redux/phonebook-selector';
 class App extends Component {
-  state = {
-    contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
-    filter: "",
-  };
+
 
   componentDidMount() {
     //const contacts = localStorage.getItem("contacts");
     //const contactsParse = JSON.parse(contacts);
     //if (contactsParse) {
     //  this.setState({ contacts: contactsParse });
-    this.props.fetchContacts()
+    this.props.onGetCurrentUser()
   }
   
 
@@ -81,6 +76,7 @@ class App extends Component {
 
     return (
       <>
+      
         <h1>Phonebook</h1>
         <Form/>
         <h2>Contacts</h2>
