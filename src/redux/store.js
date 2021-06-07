@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 //import storage from "redux-persist/lib/storage";
-import phonebookReducer from './phonebook-reducer'
+import phonebookReducer from "./phonebook-reducer";
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -22,7 +22,6 @@ const middleware = [
   }),
   //logger,
 ];
-
 
 //const contactPersistConfig = {
 //  key: "contacts",
