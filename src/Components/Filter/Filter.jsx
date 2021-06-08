@@ -7,7 +7,7 @@ import { getFilter } from "../../redux/phonebook-selector";
 const Filter = ({ filter, onChange }) => (
   <div className={styles.wrapper}>
     <label className={styles.label}>
-      Find by Name
+      Search by Name
       <input
         className={styles.input}
         type="text"

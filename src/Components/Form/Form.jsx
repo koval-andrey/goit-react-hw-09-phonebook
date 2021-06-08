@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import shortid from "shortid";
 import styles from "./Form.module.css";
 import PropTypes from "prop-types";
 import { getContacts } from "../../redux/phonebook-selector";
 import * as contactsOperations from "../../redux/phonebook-operations";
 
 class Form extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
   state = { name: "", number: "" };
-  nameInputId = shortid.generate();
-  numberInputId = shortid.generate();
 
   handleChange = (event) => {
     const { name, value } = event.currentTarget;
@@ -17,24 +17,33 @@ class Form extends Component {
   };
 
   handleSubmit = (event) => {
-    const { name, number } = this.state;
     event.preventDefault();
-    this.props.onSubmit(name, number);
+    const { name } = this.state;
+    const { contacts, onSubmit } = this.state;
+    const sameContact = contacts.find(
+      (item) => item.name.toLowerCase() === name.toLowerCase()
+    );
+    if (sameContact) {
+      alert(`${name} Already exists`);
+      this.reset();
+      return;
+    }
+    onSubmit(this.state);
     this.reset();
   };
 
-  reset() {
+  reset = () => {
     this.setState({
       name: "",
       number: "",
     });
-  }
+  };
 
   render() {
     const { name, number } = this.state;
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
-        <label className={styles.label} htmlFor={this.nameInputId}>
+        <label className={styles.label} htmlFor="name">
           Name
           <input
             className={styles.input}
@@ -42,10 +51,10 @@ class Form extends Component {
             name="name"
             value={this.state.name}
             onChange={this.handleChange}
-            id={this.nameInputId}
+            id="name"
           />
         </label>
-        <label className={styles.label} htmlFor={this.numberInputId}>
+        <label className={styles.label} htmlFor="number">
           Number
           <input
             className={styles.input}
@@ -53,7 +62,7 @@ class Form extends Component {
             name="number"
             value={this.state.number}
             onChange={this.handleChange}
-            id={this.numberInputId}
+            id="number"
           />
         </label>
 

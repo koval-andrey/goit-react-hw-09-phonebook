@@ -1,25 +1,29 @@
-import styles from './ContactList.module.css';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import { getVisibleContacts } from "../../redux/phonebook-selector";
+import styles from "./ContactList.module.css";
+import ContactsItem from "./ContactsItem.jsx"
+import PropTypes from "prop-types";
 
-const ContactList = ({ contacts, onDeleteContact }) => (
-  <ul className={styles.list}>
-    {contacts.map(({ id, name, number }) => (
-      <li className={styles.listItem} key={id}>
-        <p className={styles.listItemText}>{name}:</p>
-        <p className={styles.listItemText}>{number}</p>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => onDeleteContact(id)}
-        > Delete
-        </button>
-      </li>
-    ))}
-  </ul>
-);
-
-ContactList.propTypes = {
-  contacts: PropTypes.array,
-  onDeleteContact: PropTypes.func.isRequired,
+const ContactList = ({ contacts }) => {
+  return (
+    <>
+      {contacts && (
+        <ul className={styles.list}>
+          {contacts.map((contact) => (
+            <li className={styles.item} key={contact.id}>
+              <ContactsItem {...contact} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
 };
-export default ContactList;
+
+const mapStateToProps = (state) => {
+  return {
+    contacts: getVisibleContacts(state),
+  };
+};
+
+export default connect(mapStateToProps)(ContactList);
