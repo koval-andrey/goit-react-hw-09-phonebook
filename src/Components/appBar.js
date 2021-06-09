@@ -10,7 +10,7 @@ import styles from "./appBar.module.css";
 
 const AppBar = ({ isAuthenticated }) => {
   return (
-    <div className={styles.appbar}>
+    <div className={styles.appBar}>
       <Navigation />
       {!isAuthenticated ? <LoginMenu /> : <UserMenu />}
     </div>

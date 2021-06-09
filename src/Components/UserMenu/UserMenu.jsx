@@ -3,7 +3,7 @@ import authSelectors from '../../redux/auth/auth-selectors';
 import authOperations from '../../redux/auth/auth-operations';
 import styles from './UserMenu.module.css';
 
-const UserMenu = ({userName, onLogout}) => {
+const UserMenu = ({ userName, onLogout }) => {
     return (
         <div className={styles.wrapper}>
             <span className={styles.avatar}>{userName.slice(0, 1)}</span>
@@ -17,8 +17,9 @@ const mapStateToProps = state => ({
     userName: authSelectors.getUserName(state)
 });
 
-mapDispatchToProps = dispatch => ({
-    onLogout: () => dispatch(authOperations.logout()),
-  });
+const mapDispatchToProps = (dispatch) => ({
+  onLogout: () => dispatch(authOperations.logout()),
+});
+
   
   export default connect(mapStateToProps, mapDispatchToProps)(UserMenu); 

@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 import { getVisibleContacts } from "../../redux/phonebook-selector";
 import styles from "./ContactList.module.css";
-import ContactsItem from "./ContactsItem.jsx"
-import PropTypes from "prop-types";
+import ContactsItem from "./ContactsItem";
 
 const ContactList = ({ contacts }) => {
   return (

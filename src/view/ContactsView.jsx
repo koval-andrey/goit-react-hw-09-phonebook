@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Filter from '../Components/Filter';
 import Form from '../Components/Form';
 import ContactList from "../Components/ContactList";
-import Container from "../Components/Container/Container.js"
+import Container from "../Components/Container/Container"
 import { getIsLoading } from '../redux/phonebook-selector';
 import * as contactsOperations from '../redux/phonebook-operations';
 

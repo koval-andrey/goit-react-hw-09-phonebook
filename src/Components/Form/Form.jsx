@@ -19,7 +19,7 @@ class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { name } = this.state;
-    const { contacts, onSubmit } = this.state;
+    const { contacts, onSubmit } = this.props;
     const sameContact = contacts.find(
       (item) => item.name.toLowerCase() === name.toLowerCase()
     );
@@ -45,26 +45,32 @@ class Form extends Component {
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <label className={styles.label} htmlFor="name">
           Name
-          <input
-            className={styles.input}
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-            id="name"
-          />
         </label>
+        <input
+          className={styles.input}
+          type="text"
+          name="name"
+          value={name}
+          onChange={this.handleChange}
+          id="name"
+          placeholder="Name"
+          autoComplete="off"
+          autoFocus
+        />
+
         <label className={styles.label} htmlFor="number">
           Number
-          <input
-            className={styles.input}
-            type="text"
-            name="number"
-            value={this.state.number}
-            onChange={this.handleChange}
-            id="number"
-          />
         </label>
+        <input
+          className={styles.input}
+          type="text"
+          name="number"
+          value={number}
+          onChange={this.handleChange}
+          id="number"
+          placeholder="Phone number"
+          autoComplete="off"
+        />
 
         <button className={styles.button} type="submit">
           Add contact
@@ -79,6 +85,7 @@ Form.propTypes = {
 };
 
 const mapStateToProps = (state) => ({ contacts: getContacts(state) });
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: ({ name, number }) =>
     dispatch(contactsOperations.addContact({ name, number })),

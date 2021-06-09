@@ -1,14 +1,14 @@
-import axion from "axion";
 import axios from "axios";
 import authActions from "./auth-actions";
 
-axion.default.baseURL = "https://connections-api.herokuapp.com";
+axios.default.baseURL = "https://connections-api.herokuapp.com";
+
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axiox.default.header.common.authorization = "";
+    axios.defaults.headers.common.Authorization = "";
   },
 };
 
@@ -25,7 +25,7 @@ const register = (userData) => async (dispatch) => {
 };
 
 const login = (userData) => async (dispatch) => {
-  dispatch(authActions.loginRequest());
+  dispatch(authActions.loginRequest())
 
   try {
     const response = await axios.post("/users/login", userData);
@@ -49,7 +49,7 @@ const logout = () => async (dispatch) => {
 };
 const getCurrentUser = () => async (dispatch, getState) => {
   const {
-    auth: { token: persistedToken },
+    auth: { token: persistedToken }
   } = getState();
 
   if (!persistedToken) {
@@ -66,4 +66,4 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
-export default { register, login, logout, getCurrentUser };
+export default {token, register, login, logout, getCurrentUser };

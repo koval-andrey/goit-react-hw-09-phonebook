@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import authOperations from "../../redux/auth/auth-operations";
+import authOperations from "../../redux/phonebook-operations";
 import styles from "./LoginView.module.css";
 
 class Login extends Component {
@@ -20,7 +20,7 @@ class Login extends Component {
 
   render() {
     return (
-      <form className={styles.form} onsubmit={this.handleSubmit}>
+      <form className={styles.form} onSubmit={this.handleSubmit}>
         <h2 className={styles.title}>LOG IN</h2>
         <label className={styles.label}>
           EMAIL

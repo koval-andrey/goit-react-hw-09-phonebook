@@ -1,17 +1,17 @@
-import {  Route, Redirect } from 'react-route-dom';
+import {  Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import authSelectors from '../redux/auth/auth-selectors';
 
-const PablicRoute = ({
-    component: Component,
-    isAuthenticated,
-    redirectTo,
-    ...routeProps
+const PublicRoute = ({
+  component: Component,
+  isAuthenticated,
+  redirectTo,
+  ...routeProps
 }) => (
-    <Route
+  <Route
     {...routeProps}
-    render={props =>
+    render={(props) =>
       isAuthenticated && routeProps.restricted ? (
         <Redirect to={redirectTo} />
       ) : (

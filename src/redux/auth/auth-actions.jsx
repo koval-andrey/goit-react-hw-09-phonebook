@@ -6,7 +6,7 @@ const registerError = createAction("auth/registerError");
 
 const loginRequest = createAction("auth/loginRequest");
 const loginSuccess = createAction("auth/loginSuccess");
-const loginError = createAction("auth/loginRError");
+const loginError = createAction("auth/loginError");
 
 const logoutRequest = createAction("auth/logoutRequest");
 const logoutSuccess = createAction("auth/logoutSuccess");

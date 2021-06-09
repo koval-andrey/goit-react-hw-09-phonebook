@@ -1,4 +1,4 @@
-import { combineReducer } from "redux";
+import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
 import authActions from "./auth-actions";
 
@@ -37,7 +37,7 @@ const isAuthenticated = createReducer(false, {
   [authActions.getCurrentUserError]: () => false,
   [authActions.logoutSuccess]: () => false,
 });
-export default combineReducer({
+export default combineReducers({
   user,
   token,
   error,

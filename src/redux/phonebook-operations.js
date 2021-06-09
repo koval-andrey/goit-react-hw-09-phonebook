@@ -6,12 +6,12 @@ import {
   addContactRequest,
   addContactSuccess,
   addContactError,
-  deleteContactsRequest,
-  deleteContactsSuccess,
-  deleteContactsError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
 } from "./phonebook-action";
 
-axios.default.baseURL = "http://localhost:4040";
+axios.default.baseURL = "'https://goit-phonebook-api.herokuapp.com'";
 
 export const fetchContacts = () => (dispatch) => {
   dispatch(fetchContactsRequest());
@@ -33,11 +33,11 @@ export const addContact =
   };
 
 export const deleteContact = (contactId) => (dispatch) => {
-  dispatch(deleteContactsRequest());
+  dispatch(deleteContactRequest());
   axios
     .delete(`/contacts/${contactId}`)
-    .then(() => dispatch(deleteContactsSuccess(contactId)))
-    .catch((error) => dispatch(deleteContactsError(error)));
+    .then(() => dispatch(deleteContactSuccess(contactId)))
+    .catch((error) => dispatch(deleteContactError(error)));
 };
 
 //export default { fetchContacts, addContact, deleteContact }
