@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import authOperations from "../../redux/phonebook-operations";
+import authOperations from "../../redux/auth/auth-operations";
 import styles from "./LoginView.module.css";
 
 class Login extends Component {
