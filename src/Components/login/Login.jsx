@@ -9,7 +9,7 @@ const LoginMenu = () => {
         activeClassName={styles.link_active}
         to="/signup"
       >
-        SIGNUP
+       SIGNUP
       </NavLink>
       <NavLink
         className={styles.link}
