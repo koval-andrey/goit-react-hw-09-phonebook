@@ -11,10 +11,10 @@ import React, { Component } from "react";
 import PrivateRoute from "./Components/PrivateRoute";
 import PublicRoute from "./Components/PablicRoute";
 import AppBar from "./Components/appBar";
-import Contacts from "./view/ContactsView";
-import Login from "./view/LoginView/LoginView";
+import ContactsView from "./view/ContactsView";
+import LoginView from "./view/LoginView/LoginView";
 import HomeView from "./view/HomeView/HomeView";
-import Signup from "./view/SignupView/SignupView";
+import SignupView from "./view/SignupView/SignupView";
 import authOperations from "./redux/auth/auth-operations";
 //import ContactList from "./Components/ContactList";
 
@@ -43,18 +43,18 @@ class App extends Component {
             path="/signup"
             restricted
             redirectTo="/phonebook"
-            component={Signup}
+            component={SignupView}
           />
           <PublicRoute
             path="/login"
             restricted
             redirectTo="/phonebook"
-            component={Login}
+            component={LoginView}
           />
           <PrivateRoute
             path="/phonebook"
             redirectTo="/login"
-            component={Contacts}
+            component={ContactsView}
           />
         </Switch>
       </>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Navigation from "./Navigation";
 import LoginMenu from "./login";
-import UserMenu from "./UserMenu";
+import UserMenu from "./UserMenu/UserMenu";
 import authSelectors from "../redux/auth/auth-selectors";
 
 import styles from "./appBar.module.css";
