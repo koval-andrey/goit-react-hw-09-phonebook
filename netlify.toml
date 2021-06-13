@@ -1,6 +1,9 @@
 [build]
   publish = "build"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 657fca231fd395870d4f7a93ab72cf15245ef7d3
 [[redirects]]
   from = "/*"
   to = "/index.html"
