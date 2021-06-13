@@ -1,3 +1,4 @@
+import React from "react";
 import { connect } from "react-redux";
 import { getVisibleContacts } from "../../redux/phonebook-selector";
 import styles from "./ContactList.module.css";

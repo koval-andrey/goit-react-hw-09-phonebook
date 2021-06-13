@@ -1,3 +1,4 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Login.module.css";
 
@@ -9,7 +10,7 @@ const LoginMenu = () => {
         activeClassName={styles.link_active}
         to="/signup"
       >
-       SIGNUP
+        SIGNUP
       </NavLink>
       <NavLink
         className={styles.link}
