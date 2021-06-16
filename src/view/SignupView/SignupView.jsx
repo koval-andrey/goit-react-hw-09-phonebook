@@ -1,28 +1,41 @@
-import { Component } from "react";
-import { connect } from "react-redux";
+import { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import authOperations from "../../redux/auth/auth-operations";
 import styles from "./SignupView.module.css";
 
-class Signup extends Component {
-  state = {
-    name: "",
-    email: "",
-    password: "",
-  };
+export default function  Signup () {
+  const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  onChange = (event) => {
+  const onChange = useCallback(event => {
     const { name, value } = event.currentTarget;
-    this.setState({ [name]: value });
-  };
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        console.log(new Error());
+    }
+  }, []);
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.onSubmit(this.state);
-  };
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      dispatch(authOperations.register({ name, email, password }));
+    },
+    [dispatch, email, name, password],
+  );
 
-  render() {
     return (
-      <form className={styles.form} onSubmit={this.handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.title}>SIGN UP</h2>
         <label className={styles.label}>
           NAME
@@ -43,7 +56,7 @@ class Signup extends Component {
             name="email"
             autoComplete="off"
             placeholder="Enter email"
-            onChange={this.onChange}
+            onChange={onChange}
           />
         </label>
         <label className={styles.label}>
@@ -54,7 +67,7 @@ class Signup extends Component {
             name="password"
             autoComplete="off"
             placeholder="Enter password"
-            onChange={this.onChange}
+            onChange={onChange}
           />
         </label>
         <button type="submit" className={styles.button}>
@@ -63,10 +76,4 @@ class Signup extends Component {
       </form>
     );
   }
-}
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (state) => dispatch(authOperations.register(state)),
-});
-
-export default connect(null, mapDispatchToProps)(Signup);

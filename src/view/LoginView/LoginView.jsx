@@ -1,26 +1,32 @@
-import { Component } from "react";
-import { connect } from "react-redux";
+import { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import authOperations from "../../redux/auth/auth-operations";
 import styles from "./LoginView.module.css";
 
-class Login extends Component {
-  state = {
-    email: "",
-    password: "",
-  };
-  onChange = (event) => {
+export default function Login () {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const onChange = useCallback(event => {
     const { name, value } = event.currentTarget;
-    this.setState({ [name]: value });
-  };
+    if (name === 'email') {
+      setEmail(value);
+    }
+    if (name === 'password') {
+      setPassword(value);
+    }
+  }, []);
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.onSubmit(this.state);
-  };
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
+      dispatch(authOperations.login({ email, password }));
+    },
+    [dispatch, email, password],
+  );
 
-  render() {
     return (
-      <form className={styles.form} onSubmit={this.handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.title}>LOG IN</h2>
         <label className={styles.label}>
           EMAIL
@@ -30,7 +36,7 @@ class Login extends Component {
             name="email"
             autoComplete="off"
             placeholder="enter email"
-            onChange={this.onChange}
+            onChange={onChange}
           />
         </label>
         <label className={styles.label}>
@@ -41,7 +47,7 @@ class Login extends Component {
             name="password"
             autoComplete="off"
             placeholder="enter password"
-            onChange={this.onChange}
+            onChange={onChange}
           />
         </label>
         <button type="submit" className={styles.button}>
@@ -50,9 +56,3 @@ class Login extends Component {
       </form>
     );
   }
-}
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (state) => dispatch(authOperations.login(state)),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
