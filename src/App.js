@@ -1,6 +1,6 @@
-import { connect } from "react-redux";
 import { Switch } from "react-router-dom";
-import React, { Component } from "react";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import PrivateRoute from "./Components/PrivateRoute";
 import PublicRoute from "./Components/PablicRoute";
 import AppBar from "./Components/appBar";
@@ -12,43 +12,31 @@ import authOperations from "./redux/auth/auth-operations";
 import HamburgerMenu from "./Components/HamburgerMenu";
 
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
+export default function App() {
+  const dispatch = useDispatch();
 
-  render() {
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
+
     return (
       <>
         <AppBar />
         <HamburgerMenu />
         <Switch>
-          <PublicRoute exact path="/" component={HomeView} />
-          <PublicRoute
-            path="/signup"
-            restricted
-            redirectTo="/phonebook"
-            component={SignupView}
-          />
-          <PublicRoute
-            path="/login"
-            restricted
-            redirectTo="/phonebook"
-            component={LoginView}
-          />
-          <PrivateRoute
-            path="/phonebook"
-            redirectTo="/login"
-            component={ContactsView}
-          />
-        </Switch>
-      </>
-    );
-  }
+        <PublicRoute exact path="/">
+        <HomeView />
+        </PublicRoute>
+        <PublicRoute path="/signup" restricted redirectTo="/phonebook">
+          <SignupView/>
+          </PublicRoute>
+        <PublicRoute path="/login" restricted redirectTo="/phonebook">
+          <LoginView />
+        </PublicRoute>
+        <PrivateRoute path="/phonebook" redirectTo="/login">
+          <ContactsView />
+        </PrivateRoute>
+      </Switch>
+    </>
+  );
 }
-
-const mapDispatchToProps = {
-  onGetCurrentUser: authOperations.getCurrentUser,
-};
-
-export default connect(null, mapDispatchToProps)(App);
