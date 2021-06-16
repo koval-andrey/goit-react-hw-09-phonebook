@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const COLORS = {
   primaryDark: "#115b4c",
-  primaryLight: "#B6EDC8",
+  primaryLight: "#ccc",
 };
 
 const MenuLabel = styled.label`

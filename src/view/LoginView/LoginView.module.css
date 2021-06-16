@@ -3,10 +3,10 @@
     flex-direction: column;
     margin: 30px auto 0;
     padding: 20px;
-    width: 50vw;
+    width: 40%;
     min-height: 300px;
     justify-content: space-evenly;
-    border-radius: 4px;
+    border-radius: 6px;
     background: #3d465e;
 }
 
@@ -24,12 +24,13 @@
 }
 
 .input {
+    box-sizing: border-box;
     width: 100%;
     padding: 10px;
     font-size: 20px;
-    margin: 14px auto 30px;
+    margin: 14px 0 30px;
     border-radius: 3px;
-    border: 1px solid #555;
+    border: 3px solid #555;
 }
 
 .input::placeholder {

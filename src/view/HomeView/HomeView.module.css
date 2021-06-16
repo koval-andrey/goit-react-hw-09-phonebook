@@ -1,5 +1,6 @@
 .title {
     text-align: center;
     padding: 16px;
-    color: rgb(37, 94, 62);
+    color: rgb(43, 79, 95);
+    text-shadow: 1px 1px 10px blue,;
 }

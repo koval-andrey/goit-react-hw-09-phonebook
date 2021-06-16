@@ -23,7 +23,7 @@ class Signup extends Component {
   render() {
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
-        <h2 className={styles.title}>Sign up</h2>
+        <h2 className={styles.title}>SIGN UP</h2>
         <label className={styles.label}>
           NAME
           <input
