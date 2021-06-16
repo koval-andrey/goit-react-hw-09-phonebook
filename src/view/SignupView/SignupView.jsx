@@ -45,7 +45,7 @@ export default function  Signup () {
             name="name"
             autoComplete="off"
             placeholder="Enter name"
-            onChange={this.onChange}
+            onChange={onChange}
           />
         </label>
         <label className={styles.label}>
