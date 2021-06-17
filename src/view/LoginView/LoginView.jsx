@@ -5,24 +5,21 @@ import styles from "./LoginView.module.css";
 
 export default function Login () {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const onChange = useCallback(event => {
-    const { name, value } = event.currentTarget;
-    if (name === 'email') {
-      setEmail(value);
-    }
-    if (name === 'password') {
-      setPassword(value);
-    }
-  }, []);
+  //const [email, setEmail] = useState('');
+  //const [password, setPassword] = useState('');
+  const [user, setUser] = useState({ email: "", password: "", })
+
+  const onChange = ({ currentTarget: { name, value } }) => {
+    setUser(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();
-      dispatch(authOperations.login({ email, password }));
+      dispatch(authOperations.login(user));
+      setUser({email: "", password: "",})
     },
-    [dispatch, email, password],
+    [dispatch, user],
   );
 
     return (

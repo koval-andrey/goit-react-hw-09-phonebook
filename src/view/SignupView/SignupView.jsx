@@ -5,33 +5,39 @@ import styles from "./SignupView.module.css";
 
 export default function  Signup () {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const onChange = useCallback(event => {
-    const { name, value } = event.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
-      default:
-        console.log(new Error());
-    }
-  }, []);
+  //const [name, setName] = useState('');
+  //const [email, setEmail] = useState('');
+  //const [password, setPassword] = useState('');
+  const [user, setUser] = useState({name: "", email: "", password: "",})
+  
+  const onChange = 
+  ({ currentTarget: { name, value } }) => {
+    setUser(prev => ({ ...prev, [name]: value }));
+  };
+  
+  //useCallback(event => {
+  //  const { name, value } = event.currentTarget;
+  //  switch (name) {
+  //      setName(value);
+  //      break;
+  //    case 'email':
+ //       setEmail(value);
+ //       break;
+ //     case 'password':
+ //       setPassword(value);
+ //       break;
+//      default:
+//        console.log(new Error());
+//    }
+//  }, []);
 
   const handleSubmit = useCallback(
     event => {
       event.preventDefault();
-      dispatch(authOperations.register({ name, email, password }));
+      dispatch(authOperations.register( user ));
+      setUser({name: "", email: "", password: "",})
     },
-    [dispatch, email, name, password],
+    [dispatch, user],
   );
 
     return (

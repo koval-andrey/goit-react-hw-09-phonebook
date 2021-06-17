@@ -7,34 +7,33 @@ import * as contactsOperations from "../../redux/phonebook-operations";
 
 export default function Form(){
   const dispatch = useDispatch();
-const [name, setName] = useState('');
-const [number, setNumber] = useState('');
+//const [name, setName] = useState('');
+//const [number, setNumber] = useState('');
+
+const [contact, setContact] = useState({ name: "", number: "", })
 const contacts = useSelector(getContacts);
 
-const handleChange = event => {
-  const { name, value } = event.currentTarget;
-  if(name === "name") {setName(value);}
-  if(name === "number") {setNumber(value);}
+const handleChange = ({ currentTarget: { name, value } }) => {
+  setContact(prev => ({ ...prev, [name]: value }));
 };
 
 const handleSubmit = useCallback( event => {const onSubmit = (name, number) => {
   dispatch(contactsOperations.addContact({ name, number }));
 }; event.preventDefault();
 const sameContact = contacts.find(
-  item => item.name.toLowerCase() === name.toLowerCase(),
+  item => item.name.toLowerCase() === contact.name.toLowerCase(),
 );
-if (sameContact) {alert(`${name} already there`);
+if (sameContact) {alert(`${contact.name} already there`);
 reset();
 return;
 }
-onSubmit(name, number);
+onSubmit(contact.name, contact.number);
 reset();
 },
-[contacts, dispatch, name, number],
+[contacts, dispatch, contact],
 );
 const reset = ()=> { 
-  setName('');
-  setNumber('');
+  setContact({ name: "", number: "", })
 };
  
     return (
@@ -46,7 +45,7 @@ const reset = ()=> {
           className={styles.input}
           type="text"
           name="name"
-          value={name}
+          value={contact.name}
           onChange={handleChange}
           id="name"
           placeholder="Name"
@@ -61,7 +60,7 @@ const reset = ()=> {
           className={styles.input}
           type="text"
           name="number"
-          value={number}
+          value={contact.number}
           onChange={handleChange}
           id="number"
           placeholder="Phone number"
