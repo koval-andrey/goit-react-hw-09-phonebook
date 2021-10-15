@@ -10,6 +10,7 @@ import HomeView from "./view/HomeView/HomeView";
 import SignupView from "./view/SignupView/SignupView";
 import authOperations from "./redux/auth/auth-operations";
 import HamburgerMenu from "./Components/HamburgerMenu";
+import FormSem from './Components/FormSemantic';
 
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
     return (
       <>
         <AppBar />
+        {/*<FormSem />*/}
         <HamburgerMenu />
         <Switch>
         <PublicRoute exact path="/">
